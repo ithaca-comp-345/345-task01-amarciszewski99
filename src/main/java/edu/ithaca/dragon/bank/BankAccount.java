@@ -40,10 +40,22 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        String[] arr = email.split(".");
+        if (email.indexOf('@') == -1 || email.indexOf('.')==-1){
             return false;
         }
+        else if(email.length() <= 5){
+            return false;
+        }
+        else if(arr[1].length()!=3||arr[0].indexOf('@')==0||arr[0].indexOf('@')==arr[0].length()-1){
+            return false;
+        } 
         else {
+            for(int i=0;i<arr[1].length();i++){
+                if (arr[1].charAt(i)<97 ||arr[1].charAt(i)>122){
+                    return false;
+                }
+            }
             return true;
         }
     }
