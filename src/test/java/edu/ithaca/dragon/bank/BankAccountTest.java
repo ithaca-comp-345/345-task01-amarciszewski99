@@ -24,6 +24,12 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
+        /**
+         * Equivalent classes are invalid prefixes and invalid domains.
+         * The latter can be separated into invalid top-level domains and invalid website name.
+         * Boundary cases are testing the minimum possible length or cases that test the first
+         * and last characters of the email prefix. 
+         */
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         assertFalse(BankAccount.isEmailValid(""));
 
