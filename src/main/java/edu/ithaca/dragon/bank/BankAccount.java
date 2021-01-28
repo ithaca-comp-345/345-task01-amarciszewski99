@@ -40,19 +40,41 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        String[] arr = email.split(".");
-        if (email.indexOf('@') == -1 || email.indexOf('.')==-1){
+        
+        if (email.length() < 6){
             return false;
         }
-        else if(email.length() <= 5){
+        else if (email.indexOf('@') == -1 || email.indexOf('.')==-1){
             return false;
         }
-        else if(arr[1].length()!=3||arr[0].indexOf('@')==0||arr[0].indexOf('@')==arr[0].length()-1){
+        else if(email.indexOf('@')==0 || email.indexOf('@')==email.length()-1){
             return false;
-        } 
+        }
+        else if(email.indexOf('.')==0 || email.indexOf('.')==email.length()-1){
+            return false;
+        }
+        else if(email.indexOf('@')!=email.lastIndexOf('@')){
+            return false;
+        }
         else {
-            for(int i=0;i<arr[1].length();i++){
-                if (arr[1].charAt(i)<97 ||arr[1].charAt(i)>122){
+
+            String[] atArr = email.split("@");
+            String[] dotArr = email.split("\\.");
+            
+            
+            if(atArr[0].charAt(atArr[0].length()-1)<46 || atArr[0].charAt(atArr[0].length()-1)>122){
+                return false;
+            }
+            if(dotArr[1].length()<2){
+                return false;
+            }
+            for(int j=0;j<atArr[1].length();j++){
+                if (atArr[1].charAt(j)<36 ||atArr[1].charAt(j)>122){
+                    return false;
+                }
+            }
+            for(int j=0;j<atArr[0].length();j++){
+                if (atArr[0].charAt(j)<36 ||atArr[0].charAt(j)>122){
                     return false;
                 }
             }
