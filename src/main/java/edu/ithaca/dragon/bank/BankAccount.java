@@ -1,5 +1,7 @@
 package edu.ithaca.dragon.bank;
 
+import java.text.DecimalFormat;
+
 public class BankAccount {
 
     private String email;
@@ -30,11 +32,17 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      * throws an InsufficientFundsException if the amount is greater than the balance, or if balance is zero
      * throws an IllegalArgumentException if the amount is negative
-     * 
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
+        //Found rounding technique on stackoverflow by user cjstehno
+        DecimalFormat df = new DecimalFormat("#.##");
+        double roundedAmount = Double.parseDouble(df.format(amount));
+        
+        if (roundedAmount <= balance){
             balance -= amount;
+        }
+        else if (roundedAmount < 0){
+            throw new IllegalArgumentException("Can't withdraw a negative amount");
         }
         else {
             throw new InsufficientFundsException("Not enough money");
