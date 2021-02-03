@@ -44,32 +44,39 @@ class BankAccountTest {
          * Boundary cases are testing the minimum possible length or cases that test the first
          * and last characters of the email prefix. 
          */
+        //minimum length test
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         assertFalse(BankAccount.isEmailValid(""));
 
-        //Email prefix testing
+        //punctuation followed by a character test
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc-d@mail.com"));
 
+        //no sequential punctuation test
         assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc.def@mail.com"));
 
+        //first character can't be punctuation test
         assertFalse(BankAccount.isEmailValid(".abc@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc@mail.com"));
 
+        //invalid character test
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc_def@mail.com"));
 
-        //Email domain testing
+        //valid top-level domain test
         assertFalse(BankAccount.isEmailValid("abc@mail.c"));
         assertTrue(BankAccount.isEmailValid("abc@mail.cc"));
 
+        //valid characters in domain test
         assertFalse(BankAccount.isEmailValid("abc@mail#archive.com"));
         assertTrue(BankAccount.isEmailValid("abc@mail-archive.com"));
 
+        //existence of a top-level domain test
         assertFalse(BankAccount.isEmailValid("abc@mail"));
         assertTrue(BankAccount.isEmailValid("abc@mail.org"));
 
+        //valid domain test
         assertFalse(BankAccount.isEmailValid("abc@mail..com"));
         assertTrue(BankAccount.isEmailValid("abc@mail.com"));
     }
