@@ -34,6 +34,9 @@ class BankAccountTest {
 
         //Test negative withdraw
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));
+
+        //Test withdraw with >2 decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.111));
     }
 
     @Test
