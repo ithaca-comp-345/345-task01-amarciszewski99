@@ -55,18 +55,16 @@ public class BankAccount {
      * throws an IllegalArgumentException if the amount is negative
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        //Found rounding technique on stackoverflow by user cjstehno
-        DecimalFormat df = new DecimalFormat("#.##");
-        double roundedAmount = Double.parseDouble(df.format(amount));
-        
-        if (roundedAmount <= balance){
-            balance -= amount;
-        }
-        else if (roundedAmount < 0){
-            throw new IllegalArgumentException("Can't withdraw a negative amount");
-        }
-        else {
-            throw new InsufficientFundsException("Not enough money");
+        if (isAmountValid(amount) == true){
+            if (amount <= balance){
+                balance -= amount;
+            }
+            else if (amount < 0){
+                throw new IllegalArgumentException("Can't withdraw a negative amount");
+            }
+            else {
+                throw new InsufficientFundsException("Not enough money");
+            }
         }
     }
 

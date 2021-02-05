@@ -89,11 +89,14 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+
+        //check for exception thrown with a negative value or a value with >2 decimal places
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -100));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", 100.111));
     }
 
     @Test
     void isAmountValid(){
-
         //negative amount test
         assertFalse(BankAccount.isAmountValid(-1.23));
         assertFalse(BankAccount.isAmountValid(-1));
