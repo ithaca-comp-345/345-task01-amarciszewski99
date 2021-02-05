@@ -29,6 +29,15 @@ public class BankAccount {
     }
 
     /**
+     * Checks the validity of an amount being entered for a given transaction
+     * @param amount
+     * @return true if amount is positive and has two decimal places or less, false otherwise
+     */
+    public static boolean isAmountValid(double amount){
+        return false;
+    }
+
+    /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      * throws an InsufficientFundsException if the amount is greater than the balance, or if balance is zero
      * throws an IllegalArgumentException if the amount is negative
