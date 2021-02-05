@@ -1,7 +1,5 @@
 package edu.ithaca.dragon.bank;
 
-import java.text.DecimalFormat;
-
 public class BankAccount {
 
     private String email;
@@ -11,7 +9,7 @@ public class BankAccount {
      * @throws IllegalArgumentException if email is invalid
      */
     public BankAccount(String email, double startingBalance){
-        if (isEmailValid(email)){
+        if (isEmailValid(email) && isAmountValid(startingBalance)){
             this.email = email;
             this.balance = startingBalance;
         }
@@ -59,12 +57,12 @@ public class BankAccount {
             if (amount <= balance){
                 balance -= amount;
             }
-            else if (amount < 0){
-                throw new IllegalArgumentException("Can't withdraw a negative amount");
-            }
             else {
                 throw new InsufficientFundsException("Not enough money");
             }
+        }
+        else {
+            throw new IllegalArgumentException("Invalid amount");
         }
     }
 
