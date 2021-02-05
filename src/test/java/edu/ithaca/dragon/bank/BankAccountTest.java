@@ -93,6 +93,7 @@ class BankAccountTest {
 
     @Test
     void isAmountValid(){
+
         //negative amount test
         assertFalse(BankAccount.isAmountValid(-1.23));
         assertFalse(BankAccount.isAmountValid(-1));
